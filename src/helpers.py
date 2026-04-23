@@ -72,18 +72,14 @@ def summarize_by_group(df, group_col, value_col):
     Group the dataset by one column and sum another column.
 
     Parameters:
-        df (pd.DataFrame): Cleaned dataset.
-        group_col (str): Column to group by.
+        df (pd.DataFrame): Input DataFrame.
+        group_col (str): Column used for grouping.
         value_col (str): Column to aggregate.
 
     Returns:
-        pd.Series: Grouped and summed results sorted descending.
+        pd.Series: Grouped sums sorted in descending order.
     """
-    return (
-        df.groupby(group_col)[value_col]
-        .sum()
-        .sort_values(ascending=False)
-    )
+    return df.groupby(group_col)[value_col].sum().sort_values(ascending=False)
 
 
 def plot_yearly_trend(df):
