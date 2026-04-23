@@ -22,47 +22,25 @@ def load_data(file_path):
 
 def clean_data(df):
     """
-    Clean COVID enforcement dataset.
+    Clean the dataset by removing rows with missing location values
+    and standardizing column names.
 
-    Steps:
-    - convert date column
-    - fix numeric columns
-    - handle missing values
-    - clean column names
+    Parameters:
+        df (pd.DataFrame): Raw crime dataset.
+
+    Returns:
+        pd.DataFrame: Cleaned dataset.
     """
-
     df = df.copy()
 
-    # Convert date
-    df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
+    df = df.dropna(subset=["Neighbourhood", "Community"])
 
-    # Drop rows with invalid dates
-    df = df.dropna(subset=["Date"])
-
-    # Convert numeric columns that are wrongly stored as object
-    cols_to_numeric = [
-        "Number of positive interactions",
-        "Total Number of interactions"
-    ]
-
-    for col in cols_to_numeric:
-        df[col] = pd.to_numeric(df[col], errors="coerce")
-
-    # Fill missing numeric values with 0
-    numeric_cols = df.select_dtypes(include=["float64", "int64"]).columns
-    df[numeric_cols] = df[numeric_cols].fillna(0)
-
-    # Clean column names
     df.columns = (
         df.columns
         .str.strip()
         .str.lower()
         .str.replace(" ", "_")
-        .str.replace("(", "")
-        .str.replace(")", "")
     )
-
-    return df
 
     return df
 
