@@ -9,13 +9,13 @@ import seaborn as sns
 
 def load_data(file_path):
     """
-    Load the crime dataset from a CSV file.
+    Load the COVID-19 by-law enforcement dataset from a CSV file.
 
     Parameters:
-        file_path (str): Path to the CSV file.
+        file_path (str): Relative or absolute path to the CSV file.
 
     Returns:
-        pd.DataFrame: Loaded dataset.
+        pd.DataFrame: Raw dataset loaded into a pandas DataFrame.
     """
     return pd.read_csv(file_path)
 
