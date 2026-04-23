@@ -9,26 +9,25 @@ import seaborn as sns
 
 def load_data(file_path):
     """
-    Load the crime dataset from a CSV file.
+    Load the COVID-19 by-law enforcement dataset from a CSV file.
 
     Parameters:
-        file_path (str): Path to the CSV file.
+        file_path (str): Relative or absolute path to the CSV file.
 
     Returns:
-        pd.DataFrame: Loaded dataset.
+        pd.DataFrame: Raw dataset loaded into a pandas DataFrame.
     """
     return pd.read_csv(file_path)
 
 
 def clean_data(df):
     """
-    Clean COVID enforcement dataset.
+    Clean COVID-19 dataset by:
+    - converting date column
+    - handling missing values
+    - standardizing column names
 
-    Steps:
-    - convert date column
-    - fix numeric columns
-    - handle missing values
-    - clean column names
+    Returns a cleaned DataFrame ready for analysis.
     """
 
     df = df.copy()
@@ -72,18 +71,14 @@ def summarize_by_group(df, group_col, value_col):
     Group the dataset by one column and sum another column.
 
     Parameters:
-        df (pd.DataFrame): Cleaned dataset.
-        group_col (str): Column to group by.
+        df (pd.DataFrame): Input DataFrame.
+        group_col (str): Column used for grouping.
         value_col (str): Column to aggregate.
 
     Returns:
-        pd.Series: Grouped and summed results sorted descending.
+        pd.Series: Grouped sums sorted in descending order.
     """
-    return (
-        df.groupby(group_col)[value_col]
-        .sum()
-        .sort_values(ascending=False)
-    )
+    return df.groupby(group_col)[value_col].sum().sort_values(ascending=False)
 
 
 def plot_yearly_trend(df):
