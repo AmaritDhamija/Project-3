@@ -22,13 +22,12 @@ def load_data(file_path):
 
 def clean_data(df):
     """
-    Clean COVID enforcement dataset.
+    Clean COVID-19 dataset by:
+    - converting date column
+    - handling missing values
+    - standardizing column names
 
-    Steps:
-    - convert date column
-    - fix numeric columns
-    - handle missing values
-    - clean column names
+    Returns a cleaned DataFrame ready for analysis.
     """
 
     df = df.copy()
